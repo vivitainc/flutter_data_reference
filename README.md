@@ -1,4 +1,7 @@
 data_reference
+| CI / CD | ビルドステータス |
+|---|---|
+| Github Actions | [![Github Actions](https://github.com/vivitainc/flutter_data_reference/actions/workflows/flutter-package-test.yaml/badge.svg)](https://github.com/vivitainc/flutter_data_reference/actions/workflows/flutter-package-test.yaml) |
 
 ## Features
 
