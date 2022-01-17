@@ -1,0 +1,24 @@
+name: data_reference
+description: Utils for Flutter resource IO.
+version: 0.0.1
+homepage: https://github.com/vivitainc/flutter_data_reference
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
+
+environment:
+  sdk: ">=2.15.1 <3.0.0"
+  flutter: ">=2.8.1"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^1.0.3
+  test_extensions:
+    git:
+      url: https://github.com/vivitainc/flutter_test_extensions.git
+      ref: 216033cf019fa4ca149e381ad60fc006edb86a8b
+
+flutter:
