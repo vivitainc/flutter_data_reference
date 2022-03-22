@@ -16,9 +16,5 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.3
-  test_extensions:
-    git:
-      url: https://github.com/vivitainc/flutter_test_extensions.git
-      ref: 216033cf019fa4ca149e381ad60fc006edb86a8b
 
 flutter:
