@@ -28,8 +28,13 @@ abstract class DataReference {
   factory DataReference.file(io.File file) => FileDataReference(file);
 
   /// Flutterビルドで組み込まれたasset(Bundle)を参照する.
-  factory DataReference.flutterBundle(String path) =>
-      _FlutterBundleDataReference(path);
+  ///
+  /// アプリ以外の組み込みbundleファイルを取得する場合は [package] にてpackage名を指定する.
+  factory DataReference.flutterBundle(
+    String path, {
+    String? package,
+  }) =>
+      _FlutterBundleDataReference(path, package);
 
   /// テキストデータからバイナリを生成する.
   ///
@@ -53,10 +58,15 @@ class _DelegateDataReference extends DataReference {
 class _FlutterBundleDataReference extends DataReference {
   final String path;
 
-  _FlutterBundleDataReference(this.path);
+  final String? package;
+
+  _FlutterBundleDataReference(
+    this.path,
+    this.package,
+  );
 
   @override
-  int get hashCode => path.hashCode;
+  int get hashCode => path.hashCode ^ package.hashCode;
 
   @override
   bool operator ==(Object other) {
@@ -64,12 +74,20 @@ class _FlutterBundleDataReference extends DataReference {
       return true;
     }
 
-    return other is _FlutterBundleDataReference && other.path == path;
+    return other is _FlutterBundleDataReference &&
+        other.path == path &&
+        other.package == package;
   }
 
   @override
   Future<Uint8List> loadByteArray() async {
-    final bundle = await rootBundle.load(path);
+    final String fullPath;
+    if (package != null) {
+      fullPath = 'packages/$package/$path';
+    } else {
+      fullPath = path;
+    }
+    final bundle = await rootBundle.load(fullPath);
     return bundle.buffer.asUint8List();
   }
 }
